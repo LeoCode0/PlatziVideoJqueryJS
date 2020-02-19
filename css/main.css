@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: 'Lato', sans-serif;
+    height: 110vh;
 }
 
 a{
@@ -18,14 +19,16 @@ ul{
     list-style: none;
 }
 
-.hero{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-}
-
 .hero--menu{
+    z-index: 15;
+    width: 30%;
+    position: fixed;
     background-color: #171825;
     color: white;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
 }
 
 .hero--menu__image{
@@ -40,7 +43,7 @@ ul{
 
 .hero--menu__title{
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .hero--menu__playlists{
@@ -66,6 +69,7 @@ ul{
 
 .playlist--amigos li{
     display: flex;
+    margin-bottom: 10px;
 }
 
 .playlist--amigos__image img{
@@ -77,4 +81,90 @@ ul{
 .playlist--amigos__username{
     font-size: 15px;
     margin-left: 20px;
+}
+
+.hero--principal{
+    width: 69%;
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+
+.hero--principal__header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.perfil{
+    display: flex;
+}
+
+.formulario input{
+    width: 260px;
+    height: 30px;
+    background-color: #ededed;
+    border: 0;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+.perfil--image img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.perfil--name{
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
+.hero--principal__category{
+    height: auto;
+}
+
+.subtitle{
+    opacity: 0.6;
+}
+
+.title{
+    font-size: 18px;
+}
+
+.loader img{
+    height: 60px;
+}
+
+.cover-image img{
+    width: 200px;
+    height: 280px;
+}
+
+.footer{
+    z-index: 14;
+    width: 70%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.footer--reproductor{
+    color: white;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: #fc2854;
+    width: 100%;
+    height: 180px;
+}
+
+.footer--reproductor__image img{
+    margin-left: 130px;
+    height: 80px;
+}
+
+.footer--reproductor__titles{
+    margin-left: 80px;
 }
