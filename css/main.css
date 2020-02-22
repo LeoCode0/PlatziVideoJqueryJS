@@ -2,7 +2,6 @@ body{
     margin: 0;
     padding: 0;
     font-family: 'Lato', sans-serif;
-    height: 110vh;
 }
 
 a{
@@ -74,7 +73,7 @@ ul{
 
 .playlist--amigos__image img{
     margin-left: 20px;
-    height: 60px;
+    height: 40px;
     border-radius: 50%;
 }
 
@@ -89,6 +88,7 @@ ul{
     position: absolute;
     right: 0;
     top: 10px;
+    padding-bottom: 200px;
 }
 
 .hero--principal__header{
@@ -133,11 +133,17 @@ ul{
     font-size: 18px;
 }
 
-.loader img{
+.containerPeliculas .loader img ,.loader img{
     height: 60px;
+    width: 60px;
 }
 
-.cover-image img{
+.containerPeliculas{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.containerPeliculas img{
     width: 200px;
     height: 280px;
 }

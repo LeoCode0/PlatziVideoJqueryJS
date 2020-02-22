@@ -77,5 +77,11 @@ fetch('https://randomuser.me/api/ssw')
     const dramaList = await getData('https://yts.mx/api/v2/list_movies.json?genre=drama')
     const animationList = await getData('https://yts.mx/api/v2/list_movies.json?genre=animation')
     console.log(actionList, dramaList, animationList)
+
+
+    const $actionContainer = document.querySelector('#action')
+    const $dramaContainer = document.getElementById('#drama')
+    const $animationContainer = document.getElementById('#animation')
+    // const $home = $('.hero .list #item')
+    const $home = document.getElementById('hero')
 })()
-    
