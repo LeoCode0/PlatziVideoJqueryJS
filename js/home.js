@@ -62,25 +62,20 @@ fetch('https://randomuser.me/api/ssw')
         console.log('Algo fallo')
     });
 
-(async function load(){
-    // await 
-    // Action
-    // Terror
-    // Animation
-    async function getData(url){
-        const response = await fetch(`https://pokeapi.co${url}`)
+(async function load() {
+    // await
+    // action
+    // terror
+    // animation
+    async function getData(url) {
+        const response = await fetch(url);
         const data = await response.json()
-        return data
+        return data;
     }
-    const malePokemon = await getData('/api/v2/gender/male')
-    const femalePokemon = await getData('/api/v2/gender/female')
-    const undefinedPokemon = await getData('/api/v2/gender/3') 
-    // await getData('https://yts.mx/api/v2/list_movies.json?genre=terror')
-    //     .then(function (data){
-    //         console.log('terrorList', data)
-    //         terrorList = data
-    //     })
-    console.log('malePokemon', malePokemon)
-    console.log('femalePokemon' ,femalePokemon)
-    console.log('undefinedPokemon' ,undefinedPokemon)
+    
+    const actionList = await getData('https://yts.mx/api/v2/list_movies.json?genre=action')
+    const dramaList = await getData('https://yts.mx/api/v2/list_movies.json?genre=drama')
+    const animationList = await getData('https://yts.mx/api/v2/list_movies.json?genre=animation')
+    console.log(actionList, dramaList, animationList)
 })()
+    
