@@ -78,13 +78,64 @@ fetch('https://randomuser.me/api/ssw')
     const animationList = await getData('https://yts.mx/api/v2/list_movies.json?genre=animation')
     console.log(actionList, dramaList, animationList)
 
+    function videoItemTemplate(movie){
+        return (
+            `
+            <div class="primaryPlaylist-list" id="drama"> 
+                <div class="primaryPlaylistItem">
+                    <div class="containerPeliculas">
+                        <div class="primaryPlayListItem--image">
+                            <img src="${movie.medium_cover_image}" alt="">
+                        </div>
+                    </div>
+                    <div class="primaryPlayListItem--title">
+                        <h4>
+                            ${movie.title}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            `
+        )
+    }
 
-    const $actionContainer = document.querySelector('#action')
-    const $dramaContainer = document.getElementById('#drama')
-    const $animationContainer = document.getElementById('#animation')
+    actionList.data.movies.forEach((movie) => {
+        // debugger
+        const HTMLString = videoItemTemplate(movie)
+        console.log(HTMLString)
+    })
+
+
+    const $actionContainer = document.querySelector('action')
+    const $dramaContainer = document.getElementById('drama')
+    const $animationContainer = document.getElementById('animation')
+
+    const $form = document.getElementById('form')
+    const $reproductorContainer = document.getElementById('reproductor')
+    const $home = document.getElementById('home')
+
     // const $home = $('.hero .list #item')
     const $modal = document.getElementById('modal')
     const $overlay = document.getElementById('overlay')
     const $hideModal = document.getElementById('hide-modal')
+
+    const $modalImage = $modal.querySelector('img')
+    const $modalTitle = $modal.querySelector('h1')
+    const $modalDescription = $modal.querySelector('p')
+
+    // Forma con Jquery
+    // '<div class="primaryPlaylist-list" id="drama">' +
+    //     '<div class="primaryPlaylistItem">' +
+    //         '<div class="containerPeliculas">'+
+    //             '<img src='+imageSrc+' alt="">'+
+    //         '</div>'+
+    //     '</div>'+
+    // '</div>'
+
+
+    // Forma Vanilla
+
+
+    // console.log(videoItemTemplate('../assets/platzi-video.png', 'Platzi Video'))
 
 })()

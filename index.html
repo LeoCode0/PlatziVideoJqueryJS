@@ -93,7 +93,7 @@
         <section class="hero--principal">
             <div class="hero--principal__header">
                 <div class="formulario">
-                    <input type="text" placeholder="Buscar un artista o tema favorito">
+                    <input type="text" id="form" placeholder="Buscar un artista o tema favorito">
                 </div>
                 <div class="perfil">
                     <div class="perfil--image">
@@ -129,13 +129,6 @@
                 <div class="title">
                     <span>Drama</span>
                 </div>
-                <div class="primaryPlaylist-list" id="drama">
-                    <div class="primaryPlaylistItem">
-                        <div class="containerPeliculas">
-                            <img src="assets/images/covers/midnight.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="hero--principal__category">
                 <div class="subtitle">
@@ -169,18 +162,18 @@
             <button class="modal-btn primary" id="hide-modal">Cerrar Modal</button>
           </div>
         </div>
-    </main>
-    <footer class="footer">
-        <div class="footer--reproductor">
-            <div class="footer--reproductor__image">
-                <img src="assets/images/covers/solar-sailer.jpg" alt="">
-            </div>
-            <div class="footer--reproductor__titles">
-                <h3>Pelicula encontrada</h3>
-                <h2>Titulo de la peli</h2>
+        <div class="footer">
+            <div class="footer--reproductor" id="reproductor">
+                <div class="footer--reproductor__image">
+                    <img src="assets/images/covers/solar-sailer.jpg" alt="">
+                </div>
+                <div class="footer--reproductor__titles">
+                    <h3>Pelicula encontrada</h3>
+                    <h2>Titulo de la peli</h2>
+                </div>
             </div>
         </div>
-    </footer>
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/home.js"></script>
 </body>
