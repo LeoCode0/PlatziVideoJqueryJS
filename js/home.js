@@ -72,6 +72,15 @@ fetch('https://randomuser.me/api/ssw')
         const data = await response.json()
         return data;
     }
+    const $reproductorContainer = document.getElementById('reproductor')
+    const $form = document.getElementById('form')
+    $form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        $reproductorContainer.classList.add('footer-active')
+        const $loader = document.createElement('img')
+        debugger
+    })
+
     
     const actionList = await getData('https://yts.mx/api/v2/list_movies.json?genre=action')
     const dramaList = await getData('https://yts.mx/api/v2/list_movies.json?genre=drama')
@@ -104,15 +113,21 @@ fetch('https://randomuser.me/api/ssw')
         )
     }
     
-    
+
+    function addEventClick(e){
+        e.addEventListener('click', () => {
+            showModal()
+        })
+    }
+
     function renderMovieList(list, container){
         container.querySelector('img').remove()
         list.data.movies.forEach((movie) => {
             const HTMLString = videoItemTemplate(movie)
             const movieElement = createTemplete(HTMLString)    
             container.append(movieElement)
+            addEventClick(movieElement)
         })
-        
     } 
     
     
@@ -123,18 +138,31 @@ fetch('https://randomuser.me/api/ssw')
     const $animationContainer = document.getElementById('animation')
     renderMovieList(animationList, $animationContainer)
 
-    const $form = document.getElementById('form')
-    const $reproductorContainer = document.getElementById('reproductor')
     const $home = document.getElementById('home')
 
     // const $home = $('.hero .list #item')
     const $modal = document.getElementById('modal')
     const $overlay = document.getElementById('overlay')
     const $hideModal = document.getElementById('hide-modal')
-
+    
     const $modalImage = $modal.querySelector('img')
     const $modalTitle = $modal.querySelector('h1')
     const $modalDescription = $modal.querySelector('p')
+    
+    function showModal(){
+        $overlay.classList.add('active')
+        $modal.style.animation = 'modalIn .8s forwards'
+    }
+    
+    $hideModal.addEventListener('click', hideModal)
+    
+    function hideModal(){
+        $overlay.classList.remove('active')
+        $modal.style.animation = 'modalOut .8s forwards'
+
+    }
+
+
 
     // Forma con Jquery
     // '<div class="primaryPlaylist-list" id="drama">' +

@@ -23,6 +23,7 @@
     transform: scale(.9);
   }
   .overlay {
+    z-index: 19;
     background: rgba(0,0,0,.5);
     position: fixed;
     left: 0;
@@ -49,7 +50,7 @@
     padding: 2em;
     border-radius: .5em;
     text-align: center;
-    z-index: 2;
+    z-index: 20;
     transform: translateY(-3000px);
     position: absolute;
     left: 0;
@@ -111,3 +112,7 @@
       transform: translateY(-3000px);
     }
   }
+
+.active{
+  display: block;
+}

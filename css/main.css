@@ -171,6 +171,7 @@ ul{
     position: fixed;
     bottom: 0;
     right: 0;
+    display: none;
 }
 
 .footer--reproductor{
@@ -190,6 +191,11 @@ ul{
 
 .footer--reproductor__titles{
     margin-left: 80px;
+}
+
+
+.footer-active{
+    display: inline;
 }
 
 /* /Reproductor */
