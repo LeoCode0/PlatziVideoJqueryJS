@@ -78,37 +78,50 @@ fetch('https://randomuser.me/api/ssw')
     const animationList = await getData('https://yts.mx/api/v2/list_movies.json?genre=animation')
     console.log(actionList, dramaList, animationList)
 
+    function createTemplete(HTMLString){
+        const $html = document.implementation.createHTMLDocument()
+        $html.body.innerHTML = HTMLString
+        return $html.body.children[0]
+    }
+
+
     function videoItemTemplate(movie){
         return (
             `
-            <div class="primaryPlaylist-list" id="drama"> 
-                <div class="primaryPlaylistItem">
-                    <div class="containerPeliculas">
-                        <div class="primaryPlayListItem--image">
-                            <img src="${movie.medium_cover_image}" alt="">
-                        </div>
+            <div class="primaryPlaylistItem">
+                <div class="containerPeliculas">
+                    <div class="primaryPlayListItem--image">
+                        <img src="${movie.medium_cover_image}" alt="">
                     </div>
-                    <div class="primaryPlayListItem--title">
-                        <h4>
-                            ${movie.title}
-                        </h4>
-                    </div>
+                </div>
+                <div class="primaryPlayListItem--title">
+                    <h4>
+                        ${movie.title}
+                    </h4>
                 </div>
             </div>
             `
         )
     }
-
-    actionList.data.movies.forEach((movie) => {
-        // debugger
-        const HTMLString = videoItemTemplate(movie)
-        console.log(HTMLString)
-    })
-
-
-    const $actionContainer = document.querySelector('action')
+    
+    
+    function renderMovieList(list, container){
+        container.querySelector('img').remove()
+        list.data.movies.forEach((movie) => {
+            const HTMLString = videoItemTemplate(movie)
+            const movieElement = createTemplete(HTMLString)    
+            container.append(movieElement)
+        })
+        
+    } 
+    
+    
     const $dramaContainer = document.getElementById('drama')
+    renderMovieList(dramaList, $dramaContainer)
+    const $actionContainer = document.querySelector('#action')
+    renderMovieList(actionList, $actionContainer)
     const $animationContainer = document.getElementById('animation')
+    renderMovieList(animationList, $animationContainer)
 
     const $form = document.getElementById('form')
     const $reproductorContainer = document.getElementById('reproductor')

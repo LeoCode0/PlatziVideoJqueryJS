@@ -138,9 +138,14 @@ ul{
     width: 60px;
 }
 
-.containerPeliculas{
+.primaryPlaylist-list{
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(21, 1fr);
+    overflow-x: scroll;
+}
+
+.primaryPlaylistItem{
+    padding-right: 20px;
 }
 
 .containerPeliculas img{
