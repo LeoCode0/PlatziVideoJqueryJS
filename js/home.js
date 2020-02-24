@@ -68,9 +68,14 @@ fetch('https://randomuser.me/api/ssw')
     // terror
     // animation
     async function getData(url) {
-        const response = await fetch(url);
+        const response = await fetch(url)
         const data = await response.json()
-        return data;
+        if (data.data.movie_count > 0) {
+            // aquí se acaba
+            return data;
+          }
+          // si no hay pelis aquí continua
+          throw new Error('No se encontró ningun resultado');
     }
     const $reproductorContainer = document.getElementById('reproductor')
     const $form = document.getElementById('form')
@@ -110,20 +115,24 @@ fetch('https://randomuser.me/api/ssw')
         $reproductorContainer.append($loader)
 
         const data = new FormData($form)
-        const {
-            data: {
-                movies: pelis
-            }
-        } = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
-        const HTMLString = reproductorTemplate(pelis[0])
-        $reproductorContainer.innerHTML = HTMLString
+        try{
+            const {
+                data: {
+                    movies: pelis
+                }
+            } = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
+            const HTMLString = reproductorTemplate(pelis[0])
+            $reproductorContainer.innerHTML = HTMLString
+
+        } catch(error){
+            alert(error.message)
+            $loader.remove()
+            $home.classList.remove('footer-active')
+        }
+
     })
 
     
-    const { data: {movies: actionList} } = await getData(`${BASE_API}list_movies.json?genre=action`)
-    const { data: {movies: dramaList} } = await getData(`${BASE_API}list_movies.json?genre=drama`)
-    const { data: {movies: animationList} } = await getData(`${BASE_API}list_movies.json?genre=animation`)
-    console.log(actionList, dramaList, animationList)
 
     function createTemplete(HTMLString){
         const $html = document.implementation.createHTMLDocument()
@@ -164,19 +173,29 @@ fetch('https://randomuser.me/api/ssw')
             const HTMLString = videoItemTemplate(movie, category)
             const movieElement = createTemplete(HTMLString)    
             container.append(movieElement)
+            const image = movieElement.querySelector('img')
+            image.addEventListener('load', (event) =>{
+                event.srcElement.classList.add('fadeIn')
+            })
+            movieElement.classList.add('fadeIn')
             addEventClick(movieElement)
         })
     } 
+
     
     
-    const $dramaContainer = document.getElementById('drama')
-    renderMovieList(dramaList, $dramaContainer, 'Drama')
+    
+    const { data: {movies: actionList} } = await getData(`${BASE_API}list_movies.json?genre=action`)
     const $actionContainer = document.querySelector('#action')
     renderMovieList(actionList, $actionContainer, 'Action')
+    const { data: {movies: dramaList} } = await getData(`${BASE_API}list_movies.json?genre=drama`)
+    const $dramaContainer = document.getElementById('drama')
+    renderMovieList(dramaList, $dramaContainer, 'Drama')
+    const { data: {movies: animationList} } = await getData(`${BASE_API}list_movies.json?genre=animation`)
     const $animationContainer = document.getElementById('animation')
     renderMovieList(animationList, $animationContainer, 'Animation')
 
-    const $home = document.getElementById('home')
+    const $home = document.getElementById('hero')
 
     // const $home = $('.hero .list #item')
     const $modal = document.getElementById('modal')
