@@ -110,15 +110,19 @@ fetch('https://randomuser.me/api/ssw')
         $reproductorContainer.append($loader)
 
         const data = new FormData($form)
-        const peli = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
-        const HTMLString = reproductorTemplate(peli.data.movies[0])
+        const {
+            data: {
+                movies: pelis
+            }
+        } = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
+        const HTMLString = reproductorTemplate(pelis[0])
         $reproductorContainer.innerHTML = HTMLString
     })
 
     
-    const actionList = await getData(`${BASE_API}list_movies.json?genre=action`)
-    const dramaList = await getData(`${BASE_API}list_movies.json?genre=drama`)
-    const animationList = await getData(`${BASE_API}list_movies.json?genre=animation`)
+    const { data: {movies: actionList} } = await getData(`${BASE_API}list_movies.json?genre=action`)
+    const { data: {movies: dramaList} } = await getData(`${BASE_API}list_movies.json?genre=drama`)
+    const { data: {movies: animationList} } = await getData(`${BASE_API}list_movies.json?genre=animation`)
     console.log(actionList, dramaList, animationList)
 
     function createTemplete(HTMLString){
@@ -128,10 +132,10 @@ fetch('https://randomuser.me/api/ssw')
     }
 
 
-    function videoItemTemplate(movie){
+    function videoItemTemplate(movie, category){
         return (
             `
-            <div class="primaryPlaylistItem">
+            <div class="primaryPlaylistItem" data-id="${movie.id}" data-category=${category}>
                 <div class="containerPeliculas">
                     <div class="primaryPlayListItem--image">
                         <img src="${movie.medium_cover_image}" alt="">
@@ -150,14 +154,14 @@ fetch('https://randomuser.me/api/ssw')
 
     function addEventClick(e){
         e.addEventListener('click', () => {
-            showModal()
+            showModal(e)
         })
     }
 
-    function renderMovieList(list, container){
+    function renderMovieList(list, container, category){
         container.querySelector('img').remove()
-        list.data.movies.forEach((movie) => {
-            const HTMLString = videoItemTemplate(movie)
+        list.forEach((movie) => {
+            const HTMLString = videoItemTemplate(movie, category)
             const movieElement = createTemplete(HTMLString)    
             container.append(movieElement)
             addEventClick(movieElement)
@@ -166,11 +170,11 @@ fetch('https://randomuser.me/api/ssw')
     
     
     const $dramaContainer = document.getElementById('drama')
-    renderMovieList(dramaList, $dramaContainer)
+    renderMovieList(dramaList, $dramaContainer, 'Drama')
     const $actionContainer = document.querySelector('#action')
-    renderMovieList(actionList, $actionContainer)
+    renderMovieList(actionList, $actionContainer, 'Action')
     const $animationContainer = document.getElementById('animation')
-    renderMovieList(animationList, $animationContainer)
+    renderMovieList(animationList, $animationContainer, 'Animation')
 
     const $home = document.getElementById('home')
 
@@ -183,9 +187,36 @@ fetch('https://randomuser.me/api/ssw')
     const $modalTitle = $modal.querySelector('h1')
     const $modalDescription = $modal.querySelector('p')
     
-    function showModal(){
+
+    function findById(list, id){
+        return list.find(movie => movie.id === parseInt(id, 10))
+    }
+
+    function findMovie(id, category){
+        switch(category){
+            case 'Drama' : {
+                return findById(dramaList, id)
+            }
+            case 'Action' : {
+                return findById(actionList, id)
+            }
+            default: {
+                return findById(animationList, id)
+            }
+        }
+    }
+
+
+    function showModal(element){
         $overlay.classList.add('active')
         $modal.style.animation = 'modalIn .8s forwards'
+        const id = element.dataset.id
+        const category = element.dataset.category
+        const data = findMovie(id, category)
+
+        $modalTitle.textContent = data.title;
+        $modalImage.setAttribute('src', data.medium_cover_image);
+        $modalDescription.textContent = data.description_full
     }
     
     $hideModal.addEventListener('click', hideModal)
@@ -213,4 +244,4 @@ fetch('https://randomuser.me/api/ssw')
 
     // console.log(videoItemTemplate('../assets/platzi-video.png', 'Platzi Video'))
 
-})()
+    })()
