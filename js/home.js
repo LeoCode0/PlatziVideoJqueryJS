@@ -74,17 +74,51 @@ fetch('https://randomuser.me/api/ssw')
     }
     const $reproductorContainer = document.getElementById('reproductor')
     const $form = document.getElementById('form')
-    $form.addEventListener('submit', (e) => {
+
+    function setAttributes(element, attributes){
+        for (let attribute in attributes){
+            element.setAttribute(attribute, attributes[attribute])
+        }
+    }
+
+    const BASE_API = 'https://yts.mx/api/v2/'
+    
+    function reproductorTemplate(peli){
+        return(
+            `<div class="footer--reproductor">
+                <div class="footer--reproductor__image">
+                    <img src="${peli.medium_cover_image}" alt="">
+                </div>
+                <div class="footer--reproductor__titles">
+                    <h3>Pelicula encontrada</h3>
+                    <h2>${peli.title}</h2>
+                </div>
+            </div>
+        `
+        )
+    }
+    
+    $form.addEventListener('submit', async (e) => {
         e.preventDefault()
         $reproductorContainer.classList.add('footer-active')
         const $loader = document.createElement('img')
-        debugger
+        setAttributes($loader, {
+            src: '../assets/images/loader.gif',
+            height: 50,
+            width: 50,
+        })
+        $reproductorContainer.append($loader)
+
+        const data = new FormData($form)
+        const peli = await getData(`${BASE_API}list_movies.json?limit=1&query_term=${data.get('name')}`)
+        const HTMLString = reproductorTemplate(peli.data.movies[0])
+        $reproductorContainer.innerHTML = HTMLString
     })
 
     
-    const actionList = await getData('https://yts.mx/api/v2/list_movies.json?genre=action')
-    const dramaList = await getData('https://yts.mx/api/v2/list_movies.json?genre=drama')
-    const animationList = await getData('https://yts.mx/api/v2/list_movies.json?genre=animation')
+    const actionList = await getData(`${BASE_API}list_movies.json?genre=action`)
+    const dramaList = await getData(`${BASE_API}list_movies.json?genre=drama`)
+    const animationList = await getData(`${BASE_API}list_movies.json?genre=animation`)
     console.log(actionList, dramaList, animationList)
 
     function createTemplete(HTMLString){
