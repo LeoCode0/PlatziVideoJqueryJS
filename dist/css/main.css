@@ -1,0 +1,233 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+ol{
+    margin: 0;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Sidebar */
+
+.hero--menu{
+    z-index: 15;
+    width: 30%;
+    position: fixed;
+    background-color: #171825;
+    color: white;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.hero--menu__image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero--menu__image img{
+    width: 80%;
+}
+
+.hero--menu__title{
+    text-align: center;
+    font-size: 20px;
+}
+
+/* Inicio playlist amigos */
+
+.hero--menu__playlists{
+    height: 270px;
+    overflow-y: auto;
+}
+
+.playlists--list li a{
+    font-size: 18px;
+    line-height: 1.5em;
+    color: white;
+    padding-left: 20px;
+}
+
+.playlists--list li{
+    margin-bottom: 10px;
+} 
+
+.menu--amigos__title{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.playlist--amigos li{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.playlist--amigos__image img{
+    margin-left: 20px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.playlist--amigos__username{
+    font-size: 15px;
+    margin-left: 20px;
+}
+/* Fin playlist amigos */
+
+/* Header */
+
+.hero--principal{
+    width: 69%;
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    top: 10px;
+    padding-bottom: 200px;
+}
+
+.hero--principal__header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.perfil{
+    display: flex;
+}
+
+.formulario input{
+    width: 260px;
+    height: 30px;
+    background-color: #ededed;
+    border: 0;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+.perfil--image img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.perfil--name{
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
+/* /Fin header principal */
+/* Categorias */
+.hero--principal__category{
+    height: auto;
+}
+
+.subtitle{
+    opacity: 0.6;
+}
+
+.title{
+    font-size: 18px;
+}
+
+.containerPeliculas .loader img ,.loader img{
+    height: 60px;
+    width: 60px;
+}
+
+.primaryPlaylist-list{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[21];
+    grid-template-columns: repeat(21, 1fr);
+    overflow-x: scroll;
+}
+
+.primaryPlaylistItem{
+    padding-right: 20px;
+}
+
+.primaryPlayListItem--image{
+    cursor: pointer;
+}
+
+/* Categorias */
+
+/* Reproductor */
+
+.footer{
+    z-index: 14;
+    width: 70%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
+
+.footer--reproductor{
+    color: white;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: #fc2854;
+    width: 100%;
+    height: 180px;
+}
+
+.footer--reproductor__image img{
+    margin-left: 130px;
+    height: 120px;
+}
+
+.footer--reproductor__titles{
+    margin-left: 80px;
+}
+
+
+.footer-active{
+    display: inline;
+}
+
+/* /Reproductor */
+
+/* Animaciones */
+
+
+.fadeIn {
+    -webkit-animation: 5000ms fadeIn;
+            animation: 5000ms fadeIn;
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }
+
+/* Animaciones */
