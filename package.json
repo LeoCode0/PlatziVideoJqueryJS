@@ -1,0 +1,23 @@
+{
+  "name": "postcss",
+  "version": "1.0.0",
+  "description": "Platzi video con postcss",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeoCode0/PlatziVideoJqueryJS.git"
+  },
+  "keywords": [
+    "postcss",
+    "jsvanilla"
+  ],
+  "author": "Leonardo Espinoza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeoCode0/PlatziVideoJqueryJS/issues"
+  },
+  "homepage": "https://github.com/LeoCode0/PlatziVideoJqueryJS#readme"
+}
